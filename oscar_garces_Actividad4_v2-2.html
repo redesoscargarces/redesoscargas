@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sembrando Conciencia — Oscar Garcés · UNIMINUTO</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest:    #1a3a2a;
+    --moss:      #2d5a3d;
+    --leaf:      #3d7a50;
+    --sage:      #6aab78;
+    --mint:      #a8d5b0;
+    --mist:      #e8f5eb;
+    --parchment: #f4f0e8;
+    --soil:      #5c3d2e;
+    --clay:      #8b5e3c;
+    --sun:       #e8c547;
+    --sunlight:  #f5dfa0;
+    --ink:       #1a2a1e;
+    --muted:     #5a7a62;
+    --border:    rgba(45,90,61,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    padding: 1rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(26,58,42,0.96);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(106,171,120,0.2);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--mint);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(168,213,176,0.7); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--mint); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 70px; overflow: hidden;
+    position: relative;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 6rem; position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: inline-block;
+    width: 30px; height: 1.5px; background: var(--sage);
+  }
+  .hero-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.8rem, 4.5vw, 5rem);
+    font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.02em; color: var(--forest);
+    margin-bottom: 0.5rem;
+  }
+  .hero-title .accent {
+    color: var(--leaf); font-style: italic; display: block;
+  }
+  .hero-subtitle {
+    font-family: 'Lora', serif;
+    font-size: 1rem; font-style: italic; color: var(--muted);
+    margin-bottom: 1.8rem;
+    border-left: 3px solid var(--mint);
+    padding-left: 1rem; line-height: 1.6;
+  }
+  .hero-meta { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 2.5rem; }
+  .hero-meta-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: var(--muted); }
+  .hero-meta-item span { color: var(--forest); font-weight: 600; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 0.5rem;
+    border-radius: 2px;
+  }
+  .btn-primary { background: var(--moss); color: var(--mist); }
+  .btn-primary:hover { background: var(--forest); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,58,42,0.3); }
+  .btn-outline { background: transparent; color: var(--moss); border: 1.5px solid var(--moss); }
+  .btn-outline:hover { background: var(--moss); color: var(--mist); }
+
+  .hero-right {
+    position: relative;
+    background: linear-gradient(160deg, var(--forest) 0%, #0d1f13 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-illustration { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-cards-wrap {
+    position: relative; z-index: 3;
+    display: flex; flex-direction: column; gap: 1rem; padding: 3rem 2rem;
+  }
+  .hero-card {
+    background: rgba(232,245,235,0.93);
+    border: 1px solid rgba(106,171,120,0.3);
+    padding: 1.5rem 1.8rem; max-width: 280px; border-radius: 4px;
+  }
+  .hero-card .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--leaf); margin-bottom: 0.4rem;
+  }
+  .hero-card .card-value { font-family: 'Lora', serif; font-size: 0.95rem; color: var(--forest); line-height: 1.4; }
+
+  /* SHARED */
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 3rem; }
+  .section-wrap { padding: 6rem 0; }
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.63rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .section-tag::before { content: ''; display: inline-block; width: 22px; height: 1.5px; background: var(--sage); }
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700; line-height: 1.15;
+    letter-spacing: -0.02em; color: var(--forest); margin-bottom: 1.2rem;
+  }
+  .section-lead { font-size: 1rem; color: var(--muted); max-width: 560px; line-height: 1.75; }
+
+  /* IDENTIFICACIÓN */
+  #identificacion { background: var(--mist); border-top: 1px solid var(--border); }
+  .id-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .id-card {
+    background: white; border: 1px solid var(--border); border-radius: 4px;
+    padding: 1.5rem 1.8rem; position: relative; overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .id-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--sage), var(--mint));
+  }
+  .id-card:hover { box-shadow: 0 4px 20px rgba(45,90,61,0.1); }
+  .id-card-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+  .id-card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--sage); margin-bottom: 0.35rem;
+  }
+  .id-card-value { font-size: 0.9rem; font-weight: 600; color: var(--forest); line-height: 1.4; }
+  .id-card.wide { grid-column: 1 / -1; }
+  .map-box {
+    background: linear-gradient(135deg, var(--moss), var(--leaf));
+    border-radius: 4px; padding: 1.3rem 1.5rem;
+    color: white; display: flex; align-items: center; gap: 1.2rem; margin-top: 0.8rem;
+  }
+  .map-box strong { display: block; font-size: 0.95rem; margin-bottom: 0.2rem; }
+  .map-box span { font-size: 0.82rem; opacity: 0.85; }
+
+  /* GUÍA */
+  #guia { background: var(--parchment); }
+  .leaf-divider { text-align: center; padding: 1.2rem 0; font-size: 1.3rem; opacity: 0.35; letter-spacing: 0.5rem; }
+  .problematica-block { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 3rem; background: white; }
+  .prob-header { background: var(--forest); padding: 1.4rem 2rem; display: flex; align-items: center; gap: 1rem; }
+  .prob-number {
+    width: 34px; height: 34px; background: var(--sage); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Lora', serif; font-size: 0.95rem; font-weight: 700;
+    color: var(--forest); flex-shrink: 0;
+  }
+  .prob-title { font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 600; color: var(--mint); }
+  .prob-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .prob-cell { padding: 1.6rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .prob-cell:nth-child(3n) { border-right: none; }
+  .prob-cell.span2 { grid-column: 2 / -1; border-right: none; }
+  .prob-cell-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.4rem;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); display: inline-block; flex-shrink: 0; }
+  .prob-cell p { font-size: 0.83rem; color: #4a6855; line-height: 1.65; }
+  .bg-causes { background: rgba(26,58,42,0.03); }
+  .bg-effects { background: rgba(92,61,46,0.03); }
+
+  /* REFLEXIÓN */
+  #reflexion { background: var(--forest); padding: 6rem 0; position: relative; overflow: hidden; }
+  #reflexion::before {
+    content: '🌿'; position: absolute; right: 4%; top: 50%;
+    transform: translateY(-50%); font-size: 16rem; opacity: 0.05;
+    pointer-events: none; user-select: none;
+  }
+  #reflexion .section-tag { color: var(--mint); }
+  #reflexion .section-tag::before { background: var(--mint); }
+  #reflexion .section-title { color: var(--mist); }
+  .reflexion-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; margin-top: 2.5rem; align-items: start; }
+  .reflexion-paragraphs { display: flex; flex-direction: column; gap: 1.2rem; }
+  .reflexion-para {
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid var(--sage);
+    padding: 1.2rem 1.5rem; border-radius: 0 4px 4px 0;
+    font-size: 0.88rem; color: rgba(232,245,235,0.85);
+    line-height: 1.7; font-family: 'Lora', serif; font-style: italic;
+  }
+  .emotion-panel {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(106,171,120,0.2);
+    border-radius: 6px; padding: 1.8rem;
+  }
+  .emotion-panel h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--mint); margin-bottom: 1.1rem;
+  }
+  .emotion-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .emotion-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.86rem; color: rgba(232,245,235,0.8); }
+
+  /* PLAN */
+  #plan { background: var(--mist); border-top: 1px solid var(--border); padding: 6rem 0; }
+  .plan-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .plan-meta-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .meta-card { background: white; border: 1px solid var(--border); border-radius: 4px; padding: 1.1rem 1.4rem; border-left: 4px solid var(--sage); }
+  .meta-card .mc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--sage); margin-bottom: 0.3rem;
+  }
+  .meta-card .mc-value { font-size: 0.86rem; color: var(--forest); line-height: 1.5; font-weight: 500; }
+
+  .plan-table { width: 100%; border-collapse: collapse; background: white; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; font-size: 0.8rem; }
+  .plan-table thead tr { background: var(--forest); }
+  .plan-table th {
+    padding: 0.9rem 1rem; text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--mint);
+    border-right: 1px solid rgba(255,255,255,0.07); font-weight: 600;
+  }
+  .plan-table th:last-child { border-right: none; }
+  .plan-table td {
+    padding: 1rem; border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    color: var(--muted); line-height: 1.5; vertical-align: top;
+  }
+  .plan-table td:last-child { border-right: none; }
+  .plan-table tr:last-child td { border-bottom: none; }
+  .plan-table tr:hover td { background: rgba(232,245,235,0.6); }
+  .plan-table td.action { color: var(--forest); font-weight: 600; }
+  .week-badge {
+    display: inline-block; background: var(--mist);
+    border: 1px solid var(--mint); color: var(--moss);
+    padding: 0.15rem 0.5rem; border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; font-weight: 600; white-space: nowrap;
+  }
+  .num { font-family: 'Lora', serif; font-weight: 700; color: var(--leaf); font-size: 0.98rem; }
+
+  /* FOOTER */
+  footer {
+    background: #0d1f13; padding: 2.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1.5rem;
+    border-top: 2px solid var(--sage);
+  }
+  .footer-brand { font-family: 'Lora', serif; font-size: 1rem; font-weight: 700; color: var(--mint); }
+  .footer-info { font-size: 0.78rem; color: rgba(168,213,176,0.5); line-height: 1.65; text-align: center; }
+  .footer-credit { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); text-align: right; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+  .hero-left > * { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+  .hero-eyebrow { animation-delay:.1s; } .hero-title { animation-delay:.2s; }
+  .hero-subtitle { animation-delay:.3s; } .hero-meta { animation-delay:.4s; } .hero-cta { animation-delay:.5s; }
+  .reveal { opacity:0; transform:translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  @media (max-width:960px) {
+    .hero { grid-template-columns:1fr; }
+    .hero-right { height: 280px; }
+    .hero-left { padding: 4rem 1.5rem 3rem; }
+    .id-grid { grid-template-columns:1fr 1fr; }
+    .id-card.wide { grid-column:1/-1; }
+    .prob-grid { grid-template-columns:1fr; }
+    .prob-cell { border-right:none; }
+    .prob-cell.span2 { grid-column:1/-1; }
+    .reflexion-grid, .plan-intro { grid-template-columns:1fr; }
+    nav { padding:.9rem 1.5rem; }
+    .nav-links { display:none; }
+    .container { padding:0 1.5rem; }
+    .plan-table { font-size:0.74rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">🌿 Sembrando Conciencia</div>
+  <ul class="nav-links">
+    <li><a href="#identificacion">Identificación</a></li>
+    <li><a href="#guia">Guía Multidimensional</a></li>
+    <li><a href="#reflexion">Reflexión</a></li>
+    <li><a href="#plan">Plan de Trabajo</a></li>
+    <li><a href="#blog">Sostenibilidad</a></li>
+    <li><a href="#entrada4" style="color:#e8c547;font-weight:600;">📋 Evidencia</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="hero-eyebrow">UNIMINUTO · Responsabilidad Social · Actividad II</div>
+    <h1 class="hero-title">Sembrando<br><span class="accent">Conciencia</span></h1>
+    <p class="hero-subtitle">Huerta casera y educación ambiental en redes sociales — Belén Alpes, Medellín.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">🎓 <span>Oscar David Garcés Lans</span> · ID 001007148</div>
+      <div class="hero-meta-item">📍 <span>Belén Alpes</span>, Medellín, Antioquia</div>
+      <div class="hero-meta-item">🌱 <span>Educación ambiental</span> y sostenibilidad familiar</div>
+    </div>
+    <div class="hero-cta">
+      <a href="#plan" class="btn btn-primary">🌿 Ver Plan de Trabajo</a>
+      <a href="#guia" class="btn btn-outline">Guía Multidimensional</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <svg class="hero-illustration" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="bg1" cx="50%" cy="50%" r="70%">
+          <stop offset="0%" stop-color="#2d5a3d" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#0d1f13" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="sun1" cx="72%" cy="18%" r="28%">
+          <stop offset="0%" stop-color="#e8c547" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <rect width="600" height="700" fill="#0d1f13"/>
+      <circle cx="300" cy="350" r="300" fill="url(#bg1)"/>
+      <circle cx="432" cy="108" r="110" fill="url(#sun1)"/>
+      <!-- Grid subtle -->
+      <g stroke="rgba(106,171,120,0.06)" stroke-width="1">
+        <line x1="0" y1="175" x2="600" y2="175"/><line x1="0" y1="350" x2="600" y2="350"/>
+        <line x1="0" y1="525" x2="600" y2="525"/><line x1="150" y1="0" x2="150" y2="700"/>
+        <line x1="300" y1="0" x2="300" y2="700"/><line x1="450" y1="0" x2="450" y2="700"/>
+      </g>
+      <!-- Ground -->
+      <ellipse cx="300" cy="625" rx="270" ry="45" fill="rgba(92,61,46,0.45)"/>
+      <!-- Stem -->
+      <path d="M300 608 C299 520 294 450 296 380 C298 320 300 285 300 250" stroke="#3d7a50" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- Leaves big -->
+      <path d="M296 420 C258 392 218 400 196 382 C216 360 268 368 296 395" fill="#2d5a3d" opacity="0.9"/>
+      <path d="M298 375 C338 347 378 355 400 335 C380 313 330 320 298 348" fill="#3d7a50" opacity="0.88"/>
+      <path d="M296 460 C255 433 212 442 190 423 C212 401 265 410 296 435" fill="#1a3a2a" opacity="0.92"/>
+      <path d="M299 320 C340 292 380 300 402 280 C381 258 332 266 299 294" fill="#2d5a3d" opacity="0.82"/>
+      <!-- Veins -->
+      <path d="M296 420 C268 403 238 393 200 383" stroke="rgba(106,171,120,0.28)" stroke-width="1.5" fill="none"/>
+      <path d="M298 375 C326 358 360 347 398 336" stroke="rgba(106,171,120,0.28)" stroke-width="1.5" fill="none"/>
+      <!-- Flower -->
+      <circle cx="300" cy="242" r="19" fill="#e8c547" opacity="0.92"/>
+      <circle cx="300" cy="242" r="11" fill="#f5dfa0"/>
+      <circle cx="300" cy="242" r="5.5" fill="#c8a020"/>
+      <!-- Buds -->
+      <circle cx="281" cy="268" r="5" fill="#a8d5b0" opacity="0.8"/>
+      <circle cx="320" cy="273" r="5" fill="#a8d5b0" opacity="0.8"/>
+      <!-- Small plants -->
+      <path d="M155 582 C155 562 151 548 153 533" stroke="#3d7a50" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M153 558 C143 545 130 548 123 540 C132 528 150 533 153 550" fill="#2d5a3d" opacity="0.75"/>
+      <path d="M445 577 C445 558 441 543 443 528" stroke="#3d7a50" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M443 553 C453 540 466 543 473 535 C464 523 446 528 443 545" fill="#2d5a3d" opacity="0.75"/>
+      <!-- Drops -->
+      <ellipse cx="198" cy="492" rx="3.5" ry="5.5" fill="rgba(168,213,176,0.35)"/>
+      <ellipse cx="392" cy="465" rx="3" ry="5" fill="rgba(168,213,176,0.35)"/>
+      <!-- Stars -->
+      <text x="75" y="198" fill="rgba(232,197,71,0.35)" font-size="11">✦</text>
+      <text x="482" y="295" fill="rgba(232,197,71,0.28)" font-size="9">✦</text>
+      <text x="128" y="318" fill="rgba(232,197,71,0.22)" font-size="8">✦</text>
+      <!-- Bottom label -->
+      <text x="28" y="678" fill="rgba(168,213,176,0.18)" font-size="10" font-family="monospace" letter-spacing="3">BELÉN ALPES · MEDELLÍN · 2025</text>
+    </svg>
+
+    <div class="hero-cards-wrap">
+      <div class="hero-card">
+        <div class="card-label">Objetivo del Proyecto</div>
+        <div class="card-value">Fortalecer la conciencia ambiental en 5 personas mediante huerta casera y redes sociales</div>
+      </div>
+      <div class="hero-card">
+        <div class="card-label">Duración del Plan</div>
+        <div class="card-value">8 semanas · 10 actividades planificadas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTIFICACIÓN -->
+<section id="identificacion" class="section-wrap">
+  <div class="container">
+    <div class="section-tag">Identificación del Estudiante</div>
+    <h2 class="section-title">Datos del Proyecto</h2>
+    <p class="section-lead">Información del estudiante y la comunidad de práctica en Responsabilidad Social — UNIMINUTO.</p>
+    <div class="id-grid reveal">
+      <div class="id-card">
+        <div class="id-card-icon">🎓</div>
+        <div class="id-card-label">Estudiante</div>
+        <div class="id-card-value">Oscar David Garcés Lans</div>
+      </div>
+      <div class="id-card">
+        <div class="id-card-icon">🪪</div>
+        <div class="id-card-label">Identificación · ID</div>
+        <div class="id-card-value">1037484956 · ID 001007148</div>
+      </div>
+      <div class="id-card">
+        <div class="id-card-icon">🤝</div>
+        <div class="id-card-label">Interlocutor</div>
+        <div class="id-card-value">Oscar David Garcés Lans</div>
+      </div>
+      <div class="id-card" style="grid-column:1/3">
+        <div class="id-card-icon">🏘️</div>
+        <div class="id-card-label">Organización · Comunidad</div>
+        <div class="id-card-value">Familia y amigos del sector Belén Alpes, Medellín</div>
+      </div>
+      <div class="id-card">
+        <div class="id-card-icon">🌿</div>
+        <div class="id-card-label">Línea Temática</div>
+        <div class="id-card-value">Educación ambiental, participación comunitaria y sostenibilidad familiar</div>
+      </div>
+      <div class="id-card wide">
+        <div class="id-card-icon">📍</div>
+        <div class="id-card-label">Georeferenciación</div>
+        <div class="map-box">
+          <span style="font-size:2rem">🗺️</span>
+          <div><strong>Calle 29b #85-09 · Belén Alpes</strong><span>Medellín, Antioquia, Colombia</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUÍA MULTIDIMENSIONAL -->
+<section id="guia" class="section-wrap">
+  <div class="container">
+    <div class="section-tag">Parte I</div>
+    <h2 class="section-title">Guía Multidimensional</h2>
+    <p class="section-lead">Análisis de dos problemáticas desde el nivel local (Belén Alpes / Medellín) hasta el contexto nacional y latinoamericano.</p>
+    <div class="leaf-divider">🍃 🌿 🍃</div>
+
+    <!-- P1 -->
+    <div class="problematica-block reveal">
+      <div class="prob-header">
+        <div class="prob-number">1</div>
+        <div class="prob-title">Baja Cultura Ambiental</div>
+      </div>
+      <div class="prob-grid">
+        <div class="prob-cell">
+          <div class="prob-cell-label"><span class="dot"></span>Análisis Local · Medellín</div>
+          <p>En Medellín, la baja cultura ambiental se refleja en prácticas cotidianas como la separación deficiente en la fuente, el aumento de residuos mezclados, la disposición inadecuada de desechos especiales y la persistencia de hábitos de consumo poco responsables. El informe ambiental del Distrito muestra que la producción per cápita de residuos sólidos se proyecta en 0,5 kg/hab/día, y la generación total estimada alcanza alrededor de 843.450 toneladas al año. La tasa de aprovechamiento bajó de 19,5% en 2023 a 17,2% en 2024. A esto se suma que la tasa de aprovechamiento de residuos sólidos bajó de 19,5% en 2023 a 17,2% en 2024, evidenciando que una parte importante de los residuos que podrían reutilizarse o reciclarse sigue terminando en disposición final. Por eso, a nivel local, el problema no debe entenderse solo como "mucha basura", sino como una debilidad en la formación ciudadana, en la apropiación del territorio y en la comprensión del vínculo entre prácticas cotidianas y sostenibilidad urbana.</p>
+        </div>
+        <div class="prob-cell">
+          <div class="prob-cell-label"><span class="dot"></span>Análisis Nacional · Colombia</div>
+          <p>En Colombia, la baja cultura ambiental se manifiesta de manera amplia en el manejo de residuos, el consumo desechable, la limitada separación en la fuente y la escasa apropiación social de la economía circular. Una guía nacional del Ministerio de Ambiente reporta que en el país se producen cerca de 24,8 millones de toneladas de residuos al año, de las cuales 47% provienen de los hogares. La tasa de reciclaje era cercana a 11,82% en 2019, con una clasificación promedio de residuos en los hogares de 39,9% a nivel nacional. En 2024 se dispusieron 12.149.386 toneladas de residuos sólidos en Colombia, cifra superior a la de 2023. Esto evidencia que, aunque Colombia ha avanzado en regulación ambiental, la transformación cultural avanza más lentamente que la generación del problema.</p>
+        </div>
+        <div class="prob-cell">
+          <div class="prob-cell-label"><span class="dot"></span>Análisis Global · Latinoamérica</div>
+          <p>En América Latina y el Caribe, la baja cultura ambiental se expresa en patrones de consumo lineal, limitada valorización de residuos y una gestión aún muy orientada a la disposición final. El PNUMA señala que en la región los municipios siguen enfrentando la gestión de residuos como uno de sus principales desafíos ambientales y que todavía predomina la disposición final sobre la recuperación de materiales. CEPAL plantea que uno de los grandes retos regionales es pasar de una economía lineal a una economía circular basada en prevención, reutilización, reciclaje y recuperación de valor. La lectura regional muestra que la baja cultura ambiental latinoamericana no puede separarse de factores estructurales como urbanización acelerada, desigualdad social, débil educación ambiental y baja integración de recicladores de base en cadenas formales.</p>
+        </div>
+        <div class="prob-cell bg-causes">
+          <div class="prob-cell-label"><span class="dot"></span>Causas Históricas y Estructurales</div>
+          <p>Históricamente, esta problemática se relaciona con la consolidación de modelos de desarrollo urbano e industrial centrados en la lógica de usar y desechar. Durante décadas, los sistemas de producción y consumo privilegiaron la rapidez, el bajo costo y la masificación de bienes, sin incorporar suficientemente los costos ambientales. Socioculturalmente, se ha normalizado la idea de que el cuidado ambiental es una tarea secundaria o exclusiva del Estado, y no una responsabilidad compartida entre ciudadanía, empresas y comunidades. Políticamente, aunque existen normas, campañas y lineamientos, persiste una brecha entre la política pública y el comportamiento real de los ciudadanos, hogares, comercios e incluso instituciones. Económicamente, muchas familias y organizaciones siguen priorizando el costo inmediato sobre la sostenibilidad a largo plazo. La CEPAL advierte que la transición circular requiere marcos de política pública, inversión, innovación e integración socioeconómica de recicladores de base.</p>
+        </div>
+        <div class="prob-cell bg-effects span2">
+          <div class="prob-cell-label"><span class="dot"></span>Efectos Sociales, Culturales, Ambientales y Políticos</div>
+          <p>Entre los efectos sociales, la baja cultura ambiental deteriora la convivencia, incrementa los puntos críticos de residuos, afecta la salud pública y profundiza inequidades, porque los impactos suelen recaer con mayor fuerza sobre comunidades vulnerables. Culturalmente, reproduce hábitos individualistas y una relación distante con el territorio. Ambientalmente, incrementa la presión sobre rellenos sanitarios, disminuye el aprovechamiento, favorece contaminación de suelo y agua y aumenta emisiones asociadas a un manejo ineficiente de residuos. A escala regional y global, el PNUMA advierte que la generación de residuos sólidos urbanos podría pasar de 2.100 millones de toneladas en 2023 a 3.800 millones en 2050, lo que muestra que el problema seguirá agravándose si no cambia la cultura de consumo y disposición. Políticamente, esta problemática debilita la confianza en la gestión pública cuando la ciudadanía percibe que las campañas no cambian la realidad, pero también evidencia que las políticas ambientales fracasan si no logran apropiación social.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="problematica-block reveal">
+      <div class="prob-header" style="background:var(--soil);">
+        <div class="prob-number" style="background:var(--sunlight);color:var(--soil);">2</div>
+        <div class="prob-title">Contaminación del Aire por Prácticas Urbanas No Sostenibles</div>
+      </div>
+      <div class="prob-grid">
+        <div class="prob-cell">
+          <div class="prob-cell-label"><span class="dot" style="background:var(--clay)"></span>Análisis Local · Valle de Aburrá</div>
+          <p>En Medellín y el Valle de Aburrá, la contaminación del aire constituye una problemática ambiental y social de alta relevancia. Las autoridades metropolitanas reconocen que el deterioro de la calidad del aire se debe a fuentes antropogénicas y naturales, con especial incidencia del transporte, la industria, los hogares y las condiciones meteorológicas propias del valle. El AMVA señala que la morfología del Valle de Aburrá y las transiciones climáticas favorecen la acumulación de contaminantes. Desde la adopción del PIGECA en 2018, se ha logrado una reducción de 34,47% en la concentración de PM2.5, lo que demuestra que sí existen avances; sin embargo, el hecho de sostener planes de descontaminación y periodos de gestión de episodios indica que el problema sigue siendo estructural y no está resuelto.</p>
+        </div>
+        <div class="prob-cell">
+          <div class="prob-cell-label"><span class="dot" style="background:var(--clay)"></span>Análisis Nacional · Colombia</div>
+          <p>A nivel nacional, la calidad del aire sigue siendo una preocupación sanitaria y ambiental. El Ministerio de Ambiente informó en 2025 que, aunque el país ha tenido avances como la reducción del azufre en combustibles y la promoción de la electrificación del transporte, ninguna estación de monitoreo alcanzó los niveles recomendados por la OMS en 2023. En Colombia, la contaminación del aire se entrecruza con desigualdades territoriales y capacidades institucionales dispares: no todos los municipios cuentan con el mismo nivel de monitoreo, gestión ni pedagogía ambiental. El problema nacional debe leerse no solo como un asunto técnico de contaminantes, sino como un desafío de gobernanza, salud pública, planeación urbana y justicia ambiental.</p>
+        </div>
+        <div class="prob-cell">
+          <div class="prob-cell-label"><span class="dot" style="background:var(--clay)"></span>Análisis Global · Las Américas</div>
+          <p>En el contexto latinoamericano y de las Américas, la contaminación del aire es reconocida como uno de los principales riesgos ambientales para la salud. La OPS indica que en la región de las Américas la mala calidad del aire, tanto exterior como doméstica, se vincula con aproximadamente 367.000 muertes prematuras anuales. En América Latina, la contaminación atmosférica suele estar asociada a urbanización acelerada, flotas vehiculares intensivas, desigualdad en transporte público limpio, crecimiento periférico desordenado y debilidad en la transición energética. Aunque algunas ciudades han mostrado mejoras puntuales, la región sigue enfrentando el desafío de articular salud pública, movilidad sostenible, planificación del suelo y cultura ciudadana.</p>
+        </div>
+        <div class="prob-cell bg-causes">
+          <div class="prob-cell-label"><span class="dot"></span>Causas Históricas y Estructurales</div>
+          <p>Entre las causas históricas se encuentra la consolidación de modelos urbanos centrados en el vehículo motorizado, la expansión desordenada y el crecimiento industrial sin una internalización completa de costos ambientales. Socioculturalmente, se ha naturalizado el uso intensivo de vehículos particulares y se ha mantenido una percepción limitada sobre la relación entre movilidad cotidiana, combustión y enfermedad. Políticamente, aunque existen instrumentos como inventarios de emisiones, planes de descontaminación y monitoreo permanente, el cumplimiento y la articulación interinstitucional siguen siendo exigentes. Económicamente, cambiar flotas, tecnologías y patrones de consumo implica costos de transición que muchas veces retrasan medidas más ambiciosas. La causa, por tanto, es simultáneamente territorial, técnica, cultural y política.</p>
+        </div>
+        <div class="prob-cell bg-effects span2">
+          <div class="prob-cell-label"><span class="dot"></span>Efectos Sociales, Culturales, Ambientales y Políticos</div>
+          <p>Los efectos sociales son especialmente graves porque la contaminación del aire incrementa el riesgo de enfermedades respiratorias, cardiovasculares y otras afectaciones a la salud. La OMS advierte que la contaminación atmosférica es uno de los mayores riesgos ambientales para la salud. En lo cultural, la persistencia del problema evidencia una tensión entre estilos de vida urbanos y sostenibilidad. Ambientalmente, afecta ecosistemas, deteriora la calidad de vida urbana y se relaciona con emisiones que también inciden sobre el cambio climático. Políticamente, obliga a mantener medidas de vigilancia, regulación y gestión de episodios, lo que demanda coordinación institucional constante. Hay un efecto simbólico importante: cuando una ciudad reconoce avances pero al mismo tiempo mantiene alertas y controles, la comunidad comprende que el aire limpio es un bien común y no solo un asunto técnico de autoridades ambientales.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFLEXIÓN -->
+<section id="reflexion">
+  <div class="container">
+    <div class="section-tag">Reflexión Personal</div>
+    <h2 class="section-title">Emociones y Percepciones</h2>
+    <div class="reflexion-grid">
+      <div class="reflexion-paragraphs reveal">
+        <div class="reflexion-para">Inicialmente, me generó una sensación de preocupación al evidenciar la magnitud de los impactos ambientales y sociales que estas problemáticas tienen tanto a nivel local como global, especialmente en aspectos relacionados con la salud, la calidad de vida y la sostenibilidad del entorno.</div>
+        <div class="reflexion-para">Asimismo, desarrollé un sentimiento de empatía hacia las comunidades más afectadas, al reconocer que muchas de estas condiciones están asociadas a desigualdades estructurales, falta de educación ambiental continua y limitaciones institucionales que superan la responsabilidad individual.</div>
+        <div class="reflexion-para">Este proceso investigativo también fortaleció mi sentido de responsabilidad personal y profesional, al comprender que las acciones cotidianas, los hábitos de consumo y las decisiones colectivas influyen directamente en la persistencia o mitigación de estos problemas.</div>
+        <div class="reflexion-para">En consecuencia, esta investigación no solo me permitió ampliar el conocimiento sobre las problemáticas abordadas, sino que también me generó una reflexión crítica frente al rol que cada individuo y organización desempeña en la construcción de entornos más sostenibles, motivándome una mayor disposición a participar activamente en iniciativas de cambio y en la promoción de prácticas responsables dentro de la comunidad o mi círculo.</div>
+      </div>
+      <div class="emotion-panel reveal">
+        <h4>Dimensiones Emocionales</h4>
+        <div class="emotion-list">
+          <div class="emotion-item"><span>😟</span> Preocupación por el impacto ambiental</div>
+          <div class="emotion-item"><span>🤲</span> Empatía hacia comunidades vulnerables</div>
+          <div class="emotion-item"><span>💪</span> Sentido de responsabilidad personal</div>
+          <div class="emotion-item"><span>🔍</span> Reflexión crítica sobre hábitos cotidianos</div>
+          <div class="emotion-item"><span>🌱</span> Motivación para el cambio activo</div>
+          <div class="emotion-item"><span>🤝</span> Compromiso comunitario y colectivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN DE TRABAJO -->
+<section id="plan">
+  <div class="container">
+    <div class="section-tag">Parte II</div>
+    <h2 class="section-title">Plan de Trabajo</h2>
+    <div class="plan-intro reveal">
+      <div>
+        <p class="section-lead">Actividades planificadas para fortalecer la conciencia ambiental en el sector Belén Alpes a través de una huerta casera con plantas aromáticas y contenido educativo en redes sociales.</p>
+      </div>
+      <div class="plan-meta-cards">
+        <div class="meta-card">
+          <div class="mc-label">🌿 Nombre de la Actividad</div>
+          <div class="mc-value">Sembrando conciencia: huerta casera y educación ambiental en redes sociales</div>
+        </div>
+        <div class="meta-card">
+          <div class="mc-label">🎯 Objetivo Central</div>
+          <div class="mc-value">Fortalecer la conciencia ambiental y las prácticas sostenibles en un grupo de cinco personas del sector Belén Alpes, Medellín, mediante la creación de contenido educativo en redes sociales y el desarrollo de una huerta casera con plantas aromáticas, promoviendo el aprendizaje práctico, la participación familiar y hábitos responsables en el hogar</div>
+        </div>
+        <div class="meta-card">
+          <div class="mc-label">📚 Línea Temática</div>
+          <div class="mc-value">Educación ambiental, participación comunitaria y sostenibilidad familiar</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="overflow-x:auto;">
+      <table class="plan-table">
+        <thead>
+          <tr>
+            <th>Acciones a Desarrollar</th>
+            <th>Duración / Semana</th>
+            <th>Estrategia</th>
+            <th>Canal</th>
+            <th>Responsable</th>
+            <th>Recursos</th>
+            <th>Indicadores</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="action">Reunión inicial con familia y amigos — socializar el proyecto</td>
+            <td><span class="week-badge">Sem. 1 · 2h</span></td>
+            <td>Explicar objetivos, roles, beneficios del proyecto y cronograma</td>
+            <td>Presencial (hogar)</td>
+            <td>Estudiante líder</td>
+            <td>Cuaderno, lapiceros</td>
+            <td><span class="num">5</span> personas informadas y comprometidas</td>
+          </tr>
+          <tr>
+            <td class="action">Creación del perfil en red social del proyecto</td>
+            <td><span class="week-badge">Sem. 1 · 3h</span></td>
+            <td>Diseñar nombre, propósito y contenido inicial del perfil</td>
+            <td>Virtual (red social)</td>
+            <td>Estudiante líder con apoyo del grupo</td>
+            <td>Celular, internet</td>
+            <td><span class="num">1</span> perfil creado</td>
+          </tr>
+          <tr>
+            <td class="action">Búsqueda de información sobre siembra de plantas aromáticas</td>
+            <td><span class="week-badge">Sem. 2 · 1 semana</span></td>
+            <td>Consultar fuentes confiables y organizar guía básica de siembra</td>
+            <td>Virtual</td>
+            <td>Todo el grupo</td>
+            <td>Internet, notas</td>
+            <td><span class="num">1</span> guía elaborada</td>
+          </tr>
+          <tr>
+            <td class="action">Organización de roles — cada integrante asume una siembra</td>
+            <td><span class="week-badge">Sem. 2 · 2h</span></td>
+            <td>Asignar responsabilidades por planta (tomillo, perejil, etc.)</td>
+            <td>Presencial</td>
+            <td>Grupo participante</td>
+            <td>Lista de roles</td>
+            <td><span class="num">5</span> roles definidos</td>
+          </tr>
+          <tr>
+            <td class="action">Compra o recolección de materiales para la huerta</td>
+            <td><span class="week-badge">Sem. 3 · 1 semana</span></td>
+            <td>Conseguir materas, tierra, semillas o plántulas</td>
+            <td>Presencial</td>
+            <td>Todos los participantes</td>
+            <td>Materas, tierra abonada, semillas, agua</td>
+            <td>Kit completo de siembra listo</td>
+          </tr>
+          <tr>
+            <td class="action">🌱 Jornada de siembra en casa</td>
+            <td><span class="week-badge">Sem. 3 · 4h</span></td>
+            <td>Realizar la siembra de forma colaborativa</td>
+            <td>Presencial</td>
+            <td>Cada participante + líder</td>
+            <td>Materas, tierra, guantes, agua</td>
+            <td><span class="num">5</span> siembras realizadas</td>
+          </tr>
+          <tr>
+            <td class="action">📲 Creación y publicación de contenido en redes sociales</td>
+            <td><span class="week-badge">Sem. 4 · 1 semana</span></td>
+            <td>Compartir fotos, videos y mensajes ambientales</td>
+            <td>Virtual</td>
+            <td>Estudiante líder + grupo</td>
+            <td>Celular, internet</td>
+            <td><span class="num">3–5</span> publicaciones realizadas</td>
+          </tr>
+          <tr>
+            <td class="action">Seguimiento al crecimiento de las plantas</td>
+            <td><span class="week-badge">Sem. 4–8</span></td>
+            <td>Registro de avances, riego y cuidado continuo</td>
+            <td>Presencial</td>
+            <td>Cada responsable de siembra</td>
+            <td>Agua, bitácora, celular</td>
+            <td><span class="num">5</span> registros por participante</td>
+          </tr>
+          <tr>
+            <td class="action">💬 Reflexión grupal sobre aprendizajes</td>
+            <td><span class="week-badge">Sem. 8 · 2h</span></td>
+            <td>Conversatorio sobre cambios de hábitos y aprendizajes</td>
+            <td>Presencial</td>
+            <td>Todos los participantes</td>
+            <td>Bitácora, fotos</td>
+            <td><span class="num">1</span> encuentro realizado</td>
+          </tr>
+          <tr>
+            <td class="action">📋 Evaluación final del proyecto</td>
+            <td><span class="week-badge">Sem. 8 · 2h</span></td>
+            <td>Análisis de resultados e impacto del proyecto</td>
+            <td>Presencial y virtual</td>
+            <td>Estudiante líder</td>
+            <td>Lista de chequeo, registros</td>
+            <td><span class="num">1</span> informe final elaborado</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG ENTRADA 3 -->
+<section id="blog" style="background:#0d2218; padding:6rem 0; border-top:1px solid rgba(106,171,120,0.18);">
+<div class="container">
+
+  <!-- Encabezado del blog -->
+  <div style="display:flex;align-items:center;gap:0.8rem;font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:#6aab78;margin-bottom:1rem;">
+    <span style="display:inline-block;width:22px;height:1px;background:#6aab78;"></span>Sostenibilidad
+  </div>
+  <h2 style="font-family:'Lora',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:700;color:#e8f5eb;line-height:1.15;letter-spacing:-0.02em;margin-bottom:0.6rem;">
+    🌱 Sembrando conciencia:
+    <span style="display:block;font-style:italic;font-weight:400;color:#6aab78;">de la acción en casa al impacto social</span>
+  </h2>
+  <p style="font-size:0.95rem;color:rgba(168,213,176,0.65);max-width:620px;line-height:1.75;margin-bottom:3rem;">
+    Esta entrada presenta la ejecución de dos actividades del Proyecto Social de Formación para abordar la baja cultura ambiental, integrando aprendizaje práctico en el hogar y educación digital en redes sociales.
+  </p>
+
+  <!-- Actividad 1 -->
+  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:4rem;">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(61,122,80,0.25);border:1px solid rgba(106,171,120,0.3);padding:0.4rem 1rem;margin-bottom:1.2rem;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:#a8d5b0;">🌿 Actividad 1</span>
+      </div>
+      <h3 style="font-family:'Lora',serif;font-size:1.4rem;font-weight:700;color:#e8f5eb;margin-bottom:0.8rem;line-height:1.25;">Huerta casera como estrategia de aprendizaje ambiental</h3>
+      <p style="font-size:0.9rem;color:rgba(168,213,176,0.7);line-height:1.75;margin-bottom:1.2rem;">La primera actividad consistió en la creación de una huerta casera con la participación de cinco personas (familiares y amigos), donde cada integrante asumió la responsabilidad de sembrar y cuidar una planta aromática: tomillo, perejil, cilantro, hierbabuena o romero.</p>
+      <p style="font-size:0.9rem;color:rgba(168,213,176,0.7);line-height:1.75;margin-bottom:1.5rem;">El proceso inició con la socialización del proyecto, seguido de la asignación de roles, la consecución de materiales y la jornada de siembra. Posteriormente, se estableció un seguimiento constante al crecimiento de las plantas.</p>
+      <!-- Resultados -->
+      <div style="border-left:3px solid #3d7a50;padding-left:1.2rem;margin-bottom:1.5rem;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#6aab78;margin-bottom:0.6rem;">Resultados</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.45rem;">
+          <li style="font-size:0.85rem;color:#a8d5b0;display:flex;align-items:flex-start;gap:0.5rem;"><span style="color:#e8c547;margin-top:3px;">▸</span>Siembra de cinco plantas aromáticas completada</li>
+          <li style="font-size:0.85rem;color:#a8d5b0;display:flex;align-items:flex-start;gap:0.5rem;"><span style="color:#e8c547;margin-top:3px;">▸</span>Fortalecimiento del trabajo colaborativo entre participantes</li>
+          <li style="font-size:0.85rem;color:#a8d5b0;display:flex;align-items:flex-start;gap:0.5rem;"><span style="color:#e8c547;margin-top:3px;">▸</span>Aprendizajes prácticos sobre cultivo urbano y sostenibilidad</li>
+          <li style="font-size:0.85rem;color:#a8d5b0;display:flex;align-items:flex-start;gap:0.5rem;"><span style="color:#e8c547;margin-top:3px;">▸</span>Promoción del uso responsable de los recursos naturales</li>
+        </ul>
+      </div>
+      <p style="font-size:0.85rem;color:rgba(168,213,176,0.6);font-style:italic;line-height:1.7;">Esta actividad permitió comprender que el desarrollo sostenible no solo depende de grandes políticas, sino también de acciones cotidianas. La huerta casera fortaleció la relación con la naturaleza, promovió la autonomía alimentaria y generó conciencia sobre el impacto de los hábitos en el entorno.</p>
+    </div>
+
+    <!-- ODS Actividad 1 -->
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#6aab78;margin-bottom:1.2rem;">ODS Relacionados · Actividad 1</div>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+
+        <!-- ODS 12 -->
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.2rem;">
+          <div style="flex-shrink:0;">
+            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" rx="8" fill="#3B6D11"/>
+              <circle cx="52" cy="14" r="18" fill="#27500A" opacity="0.4"/>
+              <path d="M32 18 A14 14 0 0 1 46 32" fill="none" stroke="#C0DD97" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M46 32 A14 14 0 0 1 32 46" fill="none" stroke="#97C459" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M32 46 A14 14 0 0 1 18 32" fill="none" stroke="#EAF3DE" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M18 32 A14 14 0 0 1 32 18" fill="none" stroke="#C0DD97" stroke-width="3.5" stroke-linecap="round"/>
+              <polygon points="29,15 33,15 31,20" fill="#C0DD97"/>
+              <polygon points="48,29 48,35 43,32" fill="#97C459"/>
+              <polygon points="35,49 29,49 32,44" fill="#EAF3DE"/>
+              <polygon points="15,35 15,29 20,32" fill="#C0DD97"/>
+              <circle cx="32" cy="32" r="7" fill="#1a3a10"/>
+              <text x="32" y="36" text-anchor="middle" fill="#97C459" font-size="9" font-weight="bold">12</text>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#97C459;margin-bottom:0.3rem;">ODS 12 · Producción y consumo responsables</div>
+            <p style="font-size:0.82rem;color:rgba(168,213,176,0.7);line-height:1.6;">Fomenta el autoconsumo y el aprovechamiento de recursos naturales en el hogar.</p>
+          </div>
+        </div>
+
+        <!-- ODS 13 -->
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.2rem;">
+          <div style="flex-shrink:0;">
+            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" rx="8" fill="#27500A"/>
+              <circle cx="50" cy="16" r="20" fill="#173404" opacity="0.45"/>
+              <circle cx="32" cy="36" r="17" fill="none" stroke="#5DCAA5" stroke-width="1.5" opacity="0.5"/>
+              <ellipse cx="32" cy="36" rx="7" ry="17" fill="none" stroke="#9FE1CB" stroke-width="1" opacity="0.5"/>
+              <line x1="15" y1="36" x2="49" y2="36" stroke="#5DCAA5" stroke-width="0.8" opacity="0.4"/>
+              <rect x="44" y="26" width="5" height="16" rx="2.5" fill="none" stroke="#EAF3DE" stroke-width="1"/>
+              <rect x="45" y="34" width="3" height="7" rx="1.5" fill="#F09595"/>
+              <circle cx="46" cy="43" r="3.5" fill="#E24B4A"/>
+              <path d="M51 30 L56 24" fill="none" stroke="#FAC775" stroke-width="1.5" stroke-linecap="round"/>
+              <polygon points="54,21 57,24 53,26" fill="#FAC775"/>
+              <text x="20" y="20" fill="#9FE1CB" font-size="7" text-anchor="middle" opacity="0.8">13</text>
+              <rect x="12" y="14" width="16" height="9" rx="2" fill="#173404"/>
+              <text x="20" y="21" fill="#9FE1CB" font-size="7" text-anchor="middle" font-weight="bold">ODS 13</text>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#5DCAA5;margin-bottom:0.3rem;">ODS 13 · Acción por el clima</div>
+            <p style="font-size:0.82rem;color:rgba(168,213,176,0.7);line-height:1.6;">Adopción de prácticas sostenibles en el hogar que reducen el impacto climático.</p>
+          </div>
+        </div>
+
+        <!-- ODS 15 -->
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.2rem;">
+          <div style="flex-shrink:0;">
+            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" rx="8" fill="#639922"/>
+              <circle cx="52" cy="14" r="22" fill="#3B6D11" opacity="0.3"/>
+              <line x1="32" y1="58" x2="32" y2="36" stroke="#27500A" stroke-width="3" stroke-linecap="round"/>
+              <ellipse cx="32" cy="35" rx="14" ry="10" fill="#3B6D11"/>
+              <ellipse cx="32" cy="28" rx="11" ry="9" fill="#639922"/>
+              <ellipse cx="32" cy="22" rx="8" ry="7" fill="#97C459"/>
+              <ellipse cx="32" cy="17" rx="5" ry="5" fill="#C0DD97"/>
+              <path d="M32 58 Q22 61 16 56" fill="none" stroke="#27500A" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M32 58 Q42 61 48 56" fill="none" stroke="#27500A" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="19" cy="49" r="2" fill="#FAC775"/>
+              <circle cx="17" cy="47" r="1.2" fill="#FAEEDA"/>
+              <circle cx="21" cy="47" r="1.2" fill="#FAEEDA"/>
+              <rect x="7" y="8" width="16" height="9" rx="2" fill="#3B6D11"/>
+              <text x="15" y="15" fill="#C0DD97" font-size="7" text-anchor="middle" font-weight="bold">ODS 15</text>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#C0DD97;margin-bottom:0.3rem;">ODS 15 · Vida de ecosistemas terrestres</div>
+            <p style="font-size:0.82rem;color:rgba(168,213,176,0.7);line-height:1.6;">Incentiva el cuidado de las plantas y la conexión con el entorno natural desde el hogar.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(106,171,120,0.3),transparent);margin:1rem 0 4rem;"></div>
+
+  <!-- Actividad 2 -->
+  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:4rem;">
+
+    <!-- ODS Actividad 2 -->
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:#6aab78;margin-bottom:1.2rem;">ODS Relacionados · Actividad 2</div>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+
+        <!-- ODS 4 -->
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.2rem;">
+          <div style="flex-shrink:0;">
+            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" rx="8" fill="#185FA5"/>
+              <circle cx="52" cy="14" r="18" fill="#0C447C" opacity="0.4"/>
+              <rect x="18" y="26" width="22" height="18" rx="1" fill="#E6F1FB"/>
+              <rect x="40" y="26" width="22" height="18" rx="1" fill="#B5D4F4"/>
+              <line x1="40" y1="26" x2="40" y2="44" stroke="#185FA5" stroke-width="1"/>
+              <line x1="24" y1="31" x2="36" y2="31" stroke="#185FA5" stroke-width="1" opacity="0.4"/>
+              <line x1="24" y1="35" x2="36" y2="35" stroke="#185FA5" stroke-width="1" opacity="0.4"/>
+              <line x1="24" y1="39" x2="36" y2="39" stroke="#185FA5" stroke-width="1" opacity="0.4"/>
+              <line x1="44" y1="31" x2="58" y2="31" stroke="#0C447C" stroke-width="1" opacity="0.4"/>
+              <line x1="44" y1="35" x2="58" y2="35" stroke="#0C447C" stroke-width="1" opacity="0.4"/>
+              <polygon points="32,12 44,18 32,24 20,18" fill="#E6F1FB"/>
+              <line x1="44" y1="18" x2="44" y2="25" stroke="#E6F1FB" stroke-width="1.5"/>
+              <circle cx="44" cy="26" r="2" fill="#85B7EB"/>
+              <rect x="7" y="47" width="16" height="9" rx="2" fill="#0C447C"/>
+              <text x="15" y="54" fill="#85B7EB" font-size="7" text-anchor="middle" font-weight="bold">ODS 4</text>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#85B7EB;margin-bottom:0.3rem;">ODS 4 · Educación de calidad</div>
+            <p style="font-size:0.82rem;color:rgba(168,213,176,0.7);line-height:1.6;">Comparte contenido educativo accesible sobre medio ambiente y prácticas sostenibles.</p>
+          </div>
+        </div>
+
+        <!-- ODS 11 -->
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.2rem;">
+          <div style="flex-shrink:0;">
+            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" rx="8" fill="#BA7517"/>
+              <circle cx="52" cy="14" r="18" fill="#854F0B" opacity="0.35"/>
+              <rect x="10" y="38" width="9" height="20" rx="1" fill="#FAC775"/>
+              <rect x="22" y="30" width="11" height="28" rx="1" fill="#FAEEDA"/>
+              <rect x="36" y="34" width="9" height="24" rx="1" fill="#FAC775"/>
+              <rect x="48" y="26" width="12" height="32" rx="1" fill="#FAEEDA"/>
+              <rect x="9" y="36" width="5" height="4" rx="0.5" fill="#854F0B" opacity="0.4"/>
+              <rect x="24" y="33" width="5" height="4" rx="0.5" fill="#854F0B" opacity="0.4"/>
+              <rect x="24" y="40" width="5" height="4" rx="0.5" fill="#854F0B" opacity="0.4"/>
+              <rect x="50" y="30" width="5" height="4" rx="0.5" fill="#854F0B" opacity="0.4"/>
+              <line x1="34" y1="58" x2="34" y2="44" stroke="#3B6D11" stroke-width="2.5"/>
+              <circle cx="34" cy="42" r="5" fill="#3B6D11"/>
+              <circle cx="31" cy="44" r="3" fill="#639922"/>
+              <circle cx="37" cy="44" r="3" fill="#639922"/>
+              <rect x="7" y="7" width="16" height="9" rx="2" fill="#633806"/>
+              <text x="15" y="14" fill="#FAC775" font-size="7" text-anchor="middle" font-weight="bold">ODS 11</text>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#FAC775;margin-bottom:0.3rem;">ODS 11 · Ciudades y comunidades sostenibles</div>
+            <p style="font-size:0.82rem;color:rgba(168,213,176,0.7);line-height:1.6;">Promueve prácticas responsables en contextos urbanos como Belén Alpes, Medellín.</p>
+          </div>
+        </div>
+
+        <!-- ODS 17 -->
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.2rem;">
+          <div style="flex-shrink:0;">
+            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" rx="8" fill="#0F6E56"/>
+              <circle cx="52" cy="14" r="20" fill="#085041" opacity="0.35"/>
+              <circle cx="32" cy="26" r="5" fill="#9FE1CB"/>
+              <circle cx="18" cy="42" r="4.5" fill="#5DCAA5"/>
+              <circle cx="46" cy="42" r="4.5" fill="#5DCAA5"/>
+              <circle cx="10" cy="54" r="4" fill="#1D9E75"/>
+              <circle cx="26" cy="54" r="4" fill="#1D9E75"/>
+              <circle cx="38" cy="54" r="4" fill="#1D9E75"/>
+              <circle cx="54" cy="54" r="4" fill="#1D9E75"/>
+              <line x1="32" y1="31" x2="18" y2="37.5" stroke="#9FE1CB" stroke-width="1.5" opacity="0.7"/>
+              <line x1="32" y1="31" x2="46" y2="37.5" stroke="#9FE1CB" stroke-width="1.5" opacity="0.7"/>
+              <line x1="18" y1="46.5" x2="10" y2="50" stroke="#5DCAA5" stroke-width="1.5" opacity="0.6"/>
+              <line x1="18" y1="46.5" x2="26" y2="50" stroke="#5DCAA5" stroke-width="1.5" opacity="0.6"/>
+              <line x1="46" y1="46.5" x2="38" y2="50" stroke="#5DCAA5" stroke-width="1.5" opacity="0.6"/>
+              <line x1="46" y1="46.5" x2="54" y2="50" stroke="#5DCAA5" stroke-width="1.5" opacity="0.6"/>
+              <circle cx="32" cy="26" r="2.5" fill="#E1F5EE"/>
+              <rect x="7" y="7" width="16" height="9" rx="2" fill="#085041"/>
+              <text x="15" y="14" fill="#9FE1CB" font-size="7" text-anchor="middle" font-weight="bold">ODS 17</text>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#9FE1CB;margin-bottom:0.3rem;">ODS 17 · Alianzas para lograr los objetivos</div>
+            <p style="font-size:0.82rem;color:rgba(168,213,176,0.7);line-height:1.6;">Incentiva la participación colectiva y el aprendizaje compartido entre personas.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(61,122,80,0.25);border:1px solid rgba(106,171,120,0.3);padding:0.4rem 1rem;margin-bottom:1.2rem;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:#a8d5b0;">📱 Actividad 2</span>
+      </div>
+      <h3 style="font-family:'Lora',serif;font-size:1.4rem;font-weight:700;color:#e8f5eb;margin-bottom:0.8rem;line-height:1.25;">Creación de contenido ambiental en redes sociales</h3>
+      <p style="font-size:0.9rem;color:rgba(168,213,176,0.7);line-height:1.75;margin-bottom:1.2rem;">La segunda actividad consistió en la creación de un perfil en redes sociales enfocado en la difusión de contenido educativo ambiental. A través de publicaciones, se compartieron los avances de la huerta casera, recomendaciones sobre prácticas sostenibles y reflexiones sobre el cuidado del medio ambiente.</p>
+      <p style="font-size:0.9rem;color:rgba(168,213,176,0.7);line-height:1.75;margin-bottom:1.5rem;">Esta estrategia permitió llevar el aprendizaje más allá del entorno familiar, generando un espacio de sensibilización y educación para otras personas.</p>
+      <div style="border-left:3px solid #3d7a50;padding-left:1.2rem;margin-bottom:1.5rem;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#6aab78;margin-bottom:0.6rem;">Resultados</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.45rem;">
+          <li style="font-size:0.85rem;color:#a8d5b0;display:flex;align-items:flex-start;gap:0.5rem;"><span style="color:#e8c547;margin-top:3px;">▸</span>Creación de un perfil digital con enfoque ambiental</li>
+          <li style="font-size:0.85rem;color:#a8d5b0;display:flex;align-items:flex-start;gap:0.5rem;"><span style="color:#e8c547;margin-top:3px;">▸</span>Publicación de contenido relacionado con la huerta</li>
+          <li style="font-size:0.85rem;color:#a8d5b0;display:flex;align-items:flex-start;gap:0.5rem;"><span style="color:#e8c547;margin-top:3px;">▸</span>Generación de interés y participación de otras personas</li>
+          <li style="font-size:0.85rem;color:#a8d5b0;display:flex;align-items:flex-start;gap:0.5rem;"><span style="color:#e8c547;margin-top:3px;">▸</span>Fortalecimiento de habilidades comunicativas y digitales</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Integración + Reflexión final -->
+  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;">
+    <div style="background:rgba(61,122,80,0.12);border:1px solid rgba(106,171,120,0.2);padding:2rem;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#6aab78;margin-bottom:0.8rem;">🔗 Integración de actividades</div>
+      <p style="font-size:0.88rem;color:rgba(168,213,176,0.75);line-height:1.75;">Las dos actividades se articulan de manera coherente: mientras la huerta casera permitió el aprendizaje práctico y la apropiación de hábitos sostenibles, la creación de contenido en redes sociales facilitó la difusión del conocimiento y la sensibilización de otras personas. Esta integración evidencia que el desarrollo integral sostenible se construye a partir de la relación entre las personas, las comunidades y los territorios.</p>
+    </div>
+    <div style="background:rgba(61,122,80,0.12);border:1px solid rgba(106,171,120,0.2);padding:2rem;border-left:4px solid #e8c547;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#e8c547;margin-bottom:0.8rem;">💭 Reflexión final</div>
+      <p style="font-size:0.88rem;color:rgba(168,213,176,0.75);line-height:1.75;">El desarrollo de esta experiencia permitió comprender que el cambio ambiental comienza desde acciones pequeñas, pero significativas. Se fortaleció el sentido de responsabilidad social, al reconocer que cada persona tiene un papel fundamental en la construcción de un futuro sostenible. El desarrollo sostenible es una responsabilidad compartida, que inicia en el hogar y se expande hacia la comunidad.</p>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- BLOG ENTRADA 4 · EVIDENCIA                        -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="entrada4" style="background:#091a10; padding:6rem 0; border-top:2px solid rgba(232,197,71,0.25);">
+<div class="container">
+
+  <!-- Encabezado -->
+  <div style="display:flex;align-items:center;gap:0.8rem;font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:#e8c547;margin-bottom:1rem;">
+    <span style="display:inline-block;width:22px;height:1px;background:#e8c547;"></span>Entrada 4 · Blog
+  </div>
+  <h2 style="font-family:'Lora',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:700;color:#e8f5eb;line-height:1.15;letter-spacing:-0.02em;margin-bottom:0.6rem;">
+    📋 Evidencia
+    <span style="display:block;font-style:italic;font-weight:400;color:#6aab78;">Transformación social desde la acción cotidiana</span>
+  </h2>
+  <p style="font-size:0.95rem;color:rgba(168,213,176,0.65);max-width:660px;line-height:1.75;margin-bottom:3rem;">
+    Cuarta entrada del blog de práctica en Responsabilidad Social. Presenta las soluciones para la transformación social, la autoevaluación como agente de cambio, el aporte al territorio y la posición personal sobre el Proyecto Social de Formación.
+  </p>
+
+  <!-- VIDEO -->
+  <div class="reveal" style="margin-bottom:3.5rem;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#6aab78;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+      <span style="display:inline-block;width:22px;height:1.5px;background:#6aab78;"></span>Evidencia audiovisual
+    </div>
+    <h3 style="font-family:'Lora',serif;font-size:1.4rem;font-weight:700;color:#e8f5eb;margin-bottom:1.5rem;">Video del Proyecto</h3>
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid rgba(106,171,120,0.2);margin-bottom:0.8rem;">
+      <iframe
+        src="https://www.youtube.com/embed/nDATF3Uuyp4"
+        title="Sembrando Conciencia — Proyecto de Responsabilidad Social UNIMINUTO"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;">
+      </iframe>
+    </div>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(168,213,176,0.35);text-align:center;">
+      Sembrando Conciencia · Proyecto de Responsabilidad Social · UNIMINUTO 2025
+    </p>
+  </div>
+
+  <!-- SOLUCIONES -->
+  <div class="reveal" style="margin-bottom:3.5rem;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#6aab78;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+      <span style="display:inline-block;width:22px;height:1.5px;background:#6aab78;"></span>Parte I · Soluciones para la transformación social
+    </div>
+    <h3 style="font-family:'Lora',serif;font-size:1.4rem;font-weight:700;color:#e8f5eb;margin-bottom:0.8rem;">Aportes de cada solución planteada</h3>
+    <p style="font-size:0.9rem;color:rgba(168,213,176,0.65);line-height:1.8;max-width:700px;margin-bottom:2rem;">
+      Retomando las entradas anteriores, reflexiono sobre el aporte real que cada solución generó en la comunidad y el territorio.
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
+
+      <!-- Solución 1 -->
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.18);padding:1.8rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:1rem;right:1.2rem;font-family:'Lora',serif;font-size:3rem;font-weight:700;color:rgba(106,171,120,0.08);line-height:1;">01</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:#e8c547;margin-bottom:0.6rem;">Solución · Actividad 1</div>
+        <div style="font-family:'Lora',serif;font-size:1.05rem;font-weight:700;color:#e8f5eb;margin-bottom:0.7rem;line-height:1.3;">Huerta casera como estrategia de educación ambiental</div>
+        <p style="font-size:0.85rem;color:rgba(168,213,176,0.72);line-height:1.75;">La creación de una huerta con 12 plantas, involucrando activamente a mi familia en el proceso de siembra, cuidado y seguimiento, fue la solución más tangible del proyecto. Cada planta representó una decisión consciente de relacionarse de otro modo con la naturaleza.</p>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(106,171,120,0.15);font-size:0.8rem;color:rgba(168,213,176,0.55);font-style:italic;line-height:1.65;">
+          <span style="color:#6aab78;font-style:normal;font-weight:600;">Aporte a la transformación:</span> Mi hermana se llevó 6 plantas a su hogar replicando el proyecto de manera espontánea. Mi sobrino de 5 años participó con entusiasmo en la siembra, llevando consigo una semilla de conciencia ambiental para toda la vida. El aprendizaje fue bidireccional: la familia aportó saberes tradicionales sobre la tierra que complementaron el conocimiento académico.
+        </div>
+      </div>
+
+      <!-- Solución 2 -->
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.18);padding:1.8rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:1rem;right:1.2rem;font-family:'Lora',serif;font-size:3rem;font-weight:700;color:rgba(106,171,120,0.08);line-height:1;">02</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:#e8c547;margin-bottom:0.6rem;">Solución · Actividad 2</div>
+        <div style="font-family:'Lora',serif;font-size:1.05rem;font-weight:700;color:#e8f5eb;margin-bottom:0.7rem;line-height:1.3;">Contenido educativo ambiental en redes sociales</div>
+        <p style="font-size:0.85rem;color:rgba(168,213,176,0.72);line-height:1.75;">La creación del perfil @sembrando.conciencia.co y la publicación de 6 piezas gráficas sobre reciclaje, huerta, cultura ambiental, agua y plástico, extendió el alcance del proyecto más allá del hogar hacia cualquier persona con acceso a internet.</p>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(106,171,120,0.15);font-size:0.8rem;color:rgba(168,213,176,0.55);font-style:italic;line-height:1.65;">
+          <span style="color:#6aab78;font-style:normal;font-weight:600;">Aporte a la transformación:</span> Las piezas tradujeron datos complejos —como la caída de la tasa de reciclaje en Medellín del 19,5% al 17,2%— en mensajes accesibles y movilizadores. Su potencial de replicación es exponencial: cada persona que ve el contenido puede convertirse en un nuevo agente de cambio.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Reflexión complementaria -->
+    <div style="background:rgba(61,122,80,0.08);border:1px solid rgba(106,171,120,0.2);border-left:4px solid #6aab78;padding:1.8rem 2rem;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#6aab78;margin-bottom:0.8rem;">Reflexión complementaria</div>
+      <p style="font-size:0.88rem;color:rgba(168,213,176,0.75);line-height:1.8;">Las dos soluciones se articulan y potencian mutuamente: la huerta generó el contenido auténtico que alimentó las redes sociales, y las redes amplificaron lo que nació en casa. La solución más transformadora no fue ninguna por separado, sino su combinación: demostrar que es posible actuar localmente y comunicar globalmente, desde Belén Alpes hasta cualquier persona con acceso a internet.</p>
+    </div>
+  </div>
+
+  <!-- DESEMPEÑO -->
+  <div class="reveal" style="margin-bottom:3.5rem;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#6aab78;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+      <span style="display:inline-block;width:22px;height:1.5px;background:#6aab78;"></span>Parte II · Autoevaluación
+    </div>
+    <h3 style="font-family:'Lora',serif;font-size:1.4rem;font-weight:700;color:#e8f5eb;margin-bottom:0.8rem;">Mi desempeño como agente social de transformación</h3>
+    <p style="font-size:0.9rem;color:rgba(168,213,176,0.65);line-height:1.8;max-width:700px;margin-bottom:2rem;">Evaluar mi propio desempeño con honestidad es parte fundamental del aprendizaje.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.18);padding:1.8rem;">
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1.2rem;">
+          <span style="font-size:1.4rem;">💪</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:#6aab78;">Fortalezas identificadas</span>
+        </div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.65rem;">
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#e8c547;flex-shrink:0;margin-top:2px;">▸</span>Liderazgo familiar: logré convocar y motivar a mi núcleo para participar activamente en un proyecto académico.</li>
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#e8c547;flex-shrink:0;margin-top:2px;">▸</span>Comunicación efectiva: traduje conceptos complejos de sostenibilidad en acciones y mensajes comprensibles para todo público.</li>
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#e8c547;flex-shrink:0;margin-top:2px;">▸</span>Coherencia entre discurso y acción: no solo hablé de medio ambiente, sino que actué: compré, sembré y di seguimiento.</li>
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#e8c547;flex-shrink:0;margin-top:2px;">▸</span>Creatividad: la integración de huerta y contenido digital fue una solución innovadora que multiplicó el alcance.</li>
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#e8c547;flex-shrink:0;margin-top:2px;">▸</span>Apropiación de la responsabilidad social: comprendí que mi rol como estudiante se extiende hacia la comunidad.</li>
+        </ul>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.18);padding:1.8rem;">
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1.2rem;">
+          <span style="font-size:1.4rem;">🔧</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:#6aab78;">Aspectos por mejorar</span>
+        </div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.65rem;">
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#f48fb1;flex-shrink:0;margin-top:2px;">▸</span>Ampliar el alcance: en una próxima práctica involucraría vecinos, líderes comunitarios e instituciones del barrio.</li>
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#f48fb1;flex-shrink:0;margin-top:2px;">▸</span>Documentación más sistemática: una bitácora más detallada habría evidenciado cada etapa con datos cuantitativos.</li>
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#f48fb1;flex-shrink:0;margin-top:2px;">▸</span>Constancia en redes sociales: la estrategia digital puede fortalecerse con publicaciones más frecuentes e interacción mayor.</li>
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#f48fb1;flex-shrink:0;margin-top:2px;">▸</span>Medición de impacto: indicadores previos más claros habrían permitido medir el cambio de hábitos antes y después.</li>
+          <li style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:rgba(168,213,176,0.78);line-height:1.6;"><span style="color:#f48fb1;flex-shrink:0;margin-top:2px;">▸</span>Gestión del tiempo: algunos momentos requirieron más dedicación de la prevista, evidenciando la importancia de la planeación con contingencias.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- APORTE COMUNIDAD -->
+  <div class="reveal" style="margin-bottom:3.5rem;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#6aab78;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+      <span style="display:inline-block;width:22px;height:1.5px;background:#6aab78;"></span>Parte III · Impacto territorial
+    </div>
+    <h3 style="font-family:'Lora',serif;font-size:1.4rem;font-weight:700;color:#e8f5eb;margin-bottom:2rem;">Aporte realizado a la comunidad y el territorio</h3>
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;">
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.4rem;text-align:center;">
+        <div style="font-family:'Lora',serif;font-size:2.2rem;font-weight:700;color:#6aab78;line-height:1;margin-bottom:0.4rem;">5</div>
+        <div style="font-size:0.78rem;color:rgba(168,213,176,0.55);line-height:1.4;">personas directamente impactadas en Belén Alpes</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.4rem;text-align:center;">
+        <div style="font-family:'Lora',serif;font-size:2.2rem;font-weight:700;color:#6aab78;line-height:1;margin-bottom:0.4rem;">12</div>
+        <div style="font-size:0.78rem;color:rgba(168,213,176,0.55);line-height:1.4;">plantas sembradas con abono orgánico</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.4rem;text-align:center;">
+        <div style="font-family:'Lora',serif;font-size:2.2rem;font-weight:700;color:#6aab78;line-height:1;margin-bottom:0.4rem;">6</div>
+        <div style="font-size:0.78rem;color:rgba(168,213,176,0.55);line-height:1.4;">piezas de contenido ambiental publicadas</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(106,171,120,0.15);padding:1.4rem;text-align:center;">
+        <div style="font-family:'Lora',serif;font-size:2.2rem;font-weight:700;color:#6aab78;line-height:1;margin-bottom:0.4rem;">2</div>
+        <div style="font-size:0.78rem;color:rgba(168,213,176,0.55);line-height:1.4;">hogares con huerta activa al finalizar el proyecto</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(232,197,71,0.06);border:1px solid rgba(232,197,71,0.2);border-left:4px solid #e8c547;padding:2rem 2.2rem;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#e8c547;margin-bottom:0.8rem;">Aporte al territorio · Belén Alpes, Medellín</div>
+      <p style="font-size:0.9rem;color:rgba(168,213,176,0.78);line-height:1.8;margin-bottom:0.8rem;">El aporte más concreto fue demostrar que un hogar del barrio Belén Alpes puede convertirse en un espacio de educación ambiental viva. La huerta no es solo un cultivo: es un laboratorio de sostenibilidad familiar que visibiliza la relación entre el suelo, el agua, el sol y la alimentación en medio de un entorno urbano desconectado de esos ciclos naturales.</p>
+      <p style="font-size:0.9rem;color:rgba(168,213,176,0.78);line-height:1.8;margin-bottom:0.8rem;">El hecho de que mi hermana haya llevado 6 plantas a su hogar significa que el proyecto trascendió sus límites iniciales y comenzó a replicarse orgánicamente en el territorio, sin intervención institucional ni recursos adicionales. Eso es la transformación social desde abajo: acciones que se reproducen por convicción, no por obligación.</p>
+      <p style="font-size:0.9rem;color:rgba(168,213,176,0.78);line-height:1.8;">Frente a la problemática de baja cultura ambiental identificada en entradas anteriores, este proyecto aportó un modelo de intervención doméstica replicable, accesible y de bajo costo, adaptable a cualquier hogar del sector sin importar el espacio disponible o el nivel de conocimiento previo.</p>
+    </div>
+  </div>
+
+  <!-- POSICIÓN PERSONAL -->
+  <div class="reveal">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#6aab78;margin-bottom:1rem;display:flex;align-items:center;gap:0.7rem;">
+      <span style="display:inline-block;width:22px;height:1.5px;background:#6aab78;"></span>Parte IV · Punto de vista personal
+    </div>
+    <h3 style="font-family:'Lora',serif;font-size:1.4rem;font-weight:700;color:#e8f5eb;margin-bottom:1.5rem;">Mi posición sobre el Proyecto Social de Formación y su aporte al desarrollo profesional</h3>
+
+    <div style="background:var(--forest);border:1px solid rgba(106,171,120,0.2);padding:2.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-2rem;left:1rem;font-family:'Lora',serif;font-size:12rem;font-weight:700;color:rgba(106,171,120,0.05);line-height:1;pointer-events:none;">"</div>
+      <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:1rem;">
+        <p style="font-family:'Lora',serif;font-size:0.95rem;font-style:italic;color:rgba(232,245,235,0.82);line-height:1.85;">El Proyecto Social de Formación de UNIMINUTO es, en mi opinión, una de las experiencias más valiosas que puede vivir un estudiante universitario en Colombia. No porque sea un requisito académico, sino porque <strong style="color:#a8d5b0;font-style:normal;">obliga a salir del aula y a ponerse en contacto real con las problemáticas del territorio que uno habita.</strong></p>
+        <p style="font-family:'Lora',serif;font-size:0.95rem;font-style:italic;color:rgba(232,245,235,0.82);line-height:1.85;">Como estudiante de Ingeniería, estoy acostumbrado a pensar en sistemas y soluciones técnicas. Pero este proyecto me enseñó que los problemas más importantes de nuestras comunidades no se resuelven solo con tecnología: se resuelven con <strong style="color:#a8d5b0;font-style:normal;">presencia, con escucha, con ejemplo y con continuidad.</strong> Nadie cambia sus hábitos porque alguien le dijo que debería. Cambia porque vio a alguien cercano hacerlo primero.</p>
+        <p style="font-family:'Lora',serif;font-size:0.95rem;font-style:italic;color:rgba(232,245,235,0.82);line-height:1.85;">Esta práctica me formó en competencias que ningún curso técnico puede enseñar: comunicar ideas complejas de manera simple, liderar en contextos informales, tener empatía con quienes piensan distinto, y la humildad de reconocer que el conocimiento académico necesita complementarse con el saber cotidiano de las comunidades.</p>
+        <p style="font-family:'Lora',serif;font-size:0.95rem;font-style:italic;color:rgba(232,245,235,0.82);line-height:1.85;"><strong style="color:#a8d5b0;font-style:normal;">El ingeniero del siglo XXI no puede ser indiferente al entorno social y ambiental en el que opera.</strong> Cada proyecto que diseñe tendrá consecuencias sobre personas y territorios. Esta práctica me hizo consciente de esa responsabilidad de una manera que ningún examen podría lograr.</p>
+        <p style="font-family:'Lora',serif;font-size:0.95rem;font-style:italic;color:rgba(232,245,235,0.82);line-height:1.85;">Sembrando Conciencia no terminó cuando entregué este informe. Terminará cuando mi sobrino, dentro de veinte años, decida sembrar su propia huerta porque recuerda que una vez, de niño, metió sus manos en la tierra y sintió que estaba haciendo algo bueno.</p>
+      </div>
+    </div>
+
+    <!-- Reflexión final -->
+    <div style="background:rgba(232,197,71,0.08);border:1px solid rgba(232,197,71,0.25);padding:2rem 2.4rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start;">
+      <div style="font-size:2.5rem;">🌱</div>
+      <div>
+        <div style="font-family:'Lora',serif;font-size:1.1rem;font-weight:700;color:#e8c547;margin-bottom:0.7rem;">Reflexión final</div>
+        <div style="font-size:0.88rem;color:rgba(168,213,176,0.75);line-height:1.8;">El desarrollo sostenible no es una meta lejana ni una responsabilidad exclusiva de los gobiernos. Comienza en el hogar, en la decisión cotidiana de separar los residuos, de sembrar una planta, de compartir un conocimiento con quien tenemos al lado. Esta práctica me demostró que cualquier persona, desde cualquier lugar, puede ser un agente de transformación social. Solo necesita querer empezar.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <div class="footer-brand">🌿 Sembrando Conciencia</div>
+  <div class="footer-info">
+    Corporación Universitaria Minuto de Dios · UNIMINUTO<br>
+    Centro de Educación para el Desarrollo · Área de Responsabilidad Social<br>
+    <strong style="color:rgba(168,213,176,0.8)">Elaborado por: Oscar David Garcés Lans</strong>
+  </div>
+  <div class="footer-credit">
+    Tomado de: Guía UNIMINUTO Virtual<br>
+    Adaptado por: Jully Patricia Leal Garzón
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
